@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router();
 
 const User = require('../models/user')
-const Message = require('../models/message')
 
 /** Route to get all users. */
 router.get('/', async (req, res) => {

@@ -1,10 +1,12 @@
 const express = require('express')
-const messageRoutes = require('./message.js')
+const albumRoutes = require('./album.js')
 const userRoutes = require('./user.js')
+const songRoutes = require('./song.js')
 
 const router = express.Router()
 
-router.use('/messages', messageRoutes)
+router.use('/albums', albumRoutes)
 router.use('/users', userRoutes)
+router.use('/songs', songRoutes)
 
 module.exports = router
