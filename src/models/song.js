@@ -6,11 +6,11 @@ const Schema = mongoose.Schema
 const SongSchema = new Schema({
     title: { type: String, required: true },
     length: { type: String, required: true },
-    featured_artists: [{ type: String, required: false, default: null }],
-    is_single: { type: Boolean, required: true },
-    highest_chart_position: { type: Number, required: false, default: null },
-    release_date: { type: Date, required: true },
-    album: { type: Schema.Types.ObjectId, ref:"Album" },
+    featuredArtists: [{ type: String, required: false, default: null }],
+    isSingle: { type: Boolean, required: true },
+    highestChartPosition: { type: Number, required: false, default: null },
+    singleReleaseDate: { type: Date, required: false },
+    // album: { type: Schema.Types.ObjectId, ref:"Album" },
 })
 
 const Song = mongoose.model('Song', SongSchema)

@@ -25,4 +25,7 @@ app.use(router)
 // Start Server
 app.listen(process.env.PORT, () => {
   console.log(`Useless Generation listening on ${process.env.PORT}!`)
-})
+});
+
+// Populate Database
+require('./populate.js')

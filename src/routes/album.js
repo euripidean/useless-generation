@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 
-const Album = require('../models/album');
+const Album = require('../models/Album');
 
 /** Async Await Route to get all albums. */
 router.get('/', async (req, res) => {

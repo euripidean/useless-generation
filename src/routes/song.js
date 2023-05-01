@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 
-const Song = require('../models/song');
+const Song = require('../models/Song');
 
 /** Async Await Route to get all songs. */
 router.get('/', async (req, res) => {
