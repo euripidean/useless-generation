@@ -17,21 +17,6 @@
       "title": "The Holy Bible",
       "year": 1994,
       "totalTracks": 13,
-      "songs": [
-        "Yes",
-        "Ifwhiteamericatoldthetruthforonedayit'sworldwouldfallapart",
-        "Of Walking Abortion",
-        "She Is Suffering",
-        "Archives of Pain",
-        "Revol",
-        "4st 7lb",
-        "Mausoleum",
-        "Faster",
-        "This Is Yesterday",
-        "Die in the Summertime",
-        "The Intense Humming of Evil",
-        "P.C.P."
-      ],
       "chartPosition": 6,
       "coverArtUrl": "https://en.wikipedia.org/wiki/The_Holy_Bible_(album)#/media/File:Manic_Street_Preachers_The_Holy_Bible.jpg"
     },
@@ -41,13 +26,6 @@
       "totalTracks": 12,
       "chartPosition": 2,
       "coverArtUrl": "https://en.wikipedia.org/wiki/Everything_Must_Go_(Manic_Street_Preachers_album)#/media/File:Manic_Street_Preachers_Everything_Must_Go.jpg"
-    },
-    {
-      "title": "Everything Must Go (10th Anniversary Edition)",
-      "year": 2006,
-      "totalTracks": 36,
-      "chartPosition": 48,
-      "coverArtUrl": "https://en.wikipedia.org/wiki/Everything_Must_Go_(album)#/media/File:Manic_Street_Preachers_Everything_Must_Go_album_cover.jpg"
     },
     {
       "title": "This Is My Truth Tell Me Yours",
@@ -71,11 +49,11 @@
       "coverArtUrl": "https://en.wikipedia.org/wiki/Postcards_from_a_Young_Man#/media/File:Manic_Street_Preachers_-_Postcards_From_A_Young_Man.jpg"
     },
     {
-        "title": "Rewind the Film",
-        "year": 2013,
-        "totalTracks": 12,
-        "chartPosition": 4,
-        "coverArtUrl": "https://en.wikipedia.org/wiki/Rewind_the_Film#/media/File:Manic_Street_Preachers_-_Rewind_the_Film.png"
+      "title": "Rewind the Film",
+      "year": 2013,
+      "totalTracks": 12,
+      "chartPosition": 4,
+      "coverArtUrl": "https://en.wikipedia.org/wiki/Rewind_the_Film#/media/File:Manic_Street_Preachers_-_Rewind_the_Film.png"
       },
       {
         "title": "Futurology",

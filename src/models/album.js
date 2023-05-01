@@ -9,6 +9,7 @@ const AlbumSchema = new Schema({
     totalTracks: { type: Number, required: true },
     chartPosition: { type: Number, required: true },
     coverArtUrl: { type: String, required: true },
+    songs: [{ type: Schema.Types.ObjectId, ref: 'Song' }],
 })
 
 const Album = mongoose.model('Album', AlbumSchema)
