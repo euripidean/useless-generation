@@ -6,7 +6,7 @@ const Song = require('../models/Song');
 /** Async Await Route to get all songs. */
 router.get('/', async (req, res) => {
     try {
-        const songs = await Song.find();
+        const songs = await Song.find().populate('album');
         return res.json({ songs });
     } catch (err) {
         res.status(500).json({ error: err.message })

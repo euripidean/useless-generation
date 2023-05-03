@@ -29,11 +29,28 @@ const populateDatabase = async () => {
         // Delete all song data from DB
         await SongModel.deleteMany({});
 
-        await AlbumModel.create(albums);
+        await AlbumModel.create(albums, { validateBeforeSave: false });
         console.log('Album data successfully loaded');
-        await SongModel.create(songsWithDates);
-        console.log('Song data successfully loaded');
-        
+
+        //loop through every song. If the album matches the name of a Album in the database, replace the album value with the album id
+        const albumIds = await AlbumModel.find().select('_id title');
+        const albumIdMap = albumIds.reduce((acc, album) => {
+            acc[album.title] = album._id;
+            return acc;
+        }
+        , {});
+
+        const songsWithAlbumIds = songsWithDates.map(song => {
+            const newSong = { ...song };
+            newSong.album = albumIdMap[song.album];
+            return newSong;
+        });
+
+        //Build songs in the database
+        await SongModel.create(songsWithAlbumIds, { validateBeforeSave: true });
+        console.log('Song data successfully loaded and related to albums');
+
+        //Middleware on Songs Model should handle pushing the Song ID to the Album's songs array.
     } catch (err) {
         console.log(err);
     }

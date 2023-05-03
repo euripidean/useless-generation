@@ -35,6 +35,13 @@
       "coverArtUrl": "https://en.wikipedia.org/wiki/This_Is_My_Truth_Tell_Me_Yours#/media/File:Manic_Street_Preachers_This_Is_My_Truth_Tell_Me_Yours_album_cover.jpg"
     },
     {
+      "title": "Know Your Enemy",
+      "year": 2001,
+      "totalTracks": 16,
+      "chartPosition": 2,
+      "coverArtUrl": "https://en.wikipedia.org/wiki/Know_Your_Enemy_(Manic_Street_Preachers_album)#/media/File:Manic_Street_Preachers_Know_Your_Enemy_album_cover.jpg"
+    },
+    {
       "title": "Lifeblood",
       "year": 2004,
       "totalTracks": 12,
@@ -42,7 +49,21 @@
       "coverArtUrl": "https://en.wikipedia.org/wiki/Lifeblood_(Manic_Street_Preachers_album)#/media/File:Lifeblood_album_cover.jpg"
     },
     {
-      "title": "Postcards from a Young Man",
+      "title": "Send Away the Tigers",
+      "year": 2007,
+      "totalTracks": 13,
+      "chartPosition": 2,
+      "coverArtUrl": "https://en.wikipedia.org/wiki/Send_Away_the_Tigers#/media/File:Manic_Street_Preachers_-_Send_Away_the_Tigers.jpg"
+    },
+    {
+      "title": "Journal For Plague Lovers",
+      "year": 2009,
+      "totalTracks": 13,
+      "chartPosition": 3,
+      "coverArtUrl": "https://en.wikipedia.org/wiki/Journal_for_Plague_Lovers#/media/File:Manic_Street_Preachers_-_Journal_for_Plague_Lovers.jpg"
+    },
+    {
+      "title": "Postcards From a Young Man",
       "year": 2010,
       "totalTracks": 12,
       "chartPosition": 3,

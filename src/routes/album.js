@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router();
 
 const Album = require('../models/Album');
+const Song = require('../models/Song');
 
 /** Async Await Route to get all albums. */
 router.get('/', async (req, res) => {
@@ -59,5 +60,19 @@ router.delete('/:albumId', async (req, res) => {
         res.status(500).json({ error: err.message })
     }
 });
+
+/** Async await route to get the details of all songs on album */
+router.get('/:albumId/songs', async (req, res) => {
+    try {
+        const album = await Album.findById(req.params.albumId);
+        if (!album) {
+            return res.status(404).json({ message: 'Album not found' });
+        }
+        const songs = await Song.find({ album: album._id });
+        return res.status(200).json({ songs });
+    } catch (err) {
+        res.status(500).json({ error: err.message })
+    }
+  });  
 
 module.exports = router
