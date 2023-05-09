@@ -5,9 +5,6 @@ const { describe, it, after } = require('mocha');
 const app = require('../src/server');
 const User = require('../src/models/User');
 
-// // set node environment to test
-// process.env.NODE_ENV = 'test';
-
 const should = chai.should();
 
 chai.use(chaiHttp);
