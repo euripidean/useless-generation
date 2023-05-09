@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router();
-
 const Album = require('../models/Album');
 const Song = require('../models/Song');
 
@@ -28,6 +27,22 @@ router.get('/:albumId', async (req, res) => {
         res.status(500).json({ error: err.message })
     }
 });
+
+/** Async await Route to get album by name  */
+router.get('name/:albumName', async (req, res) => {
+    const { albumName } = req.params;
+    try {
+        //find album by name searching the title without spaces and all lower case
+        const album = await Album.findOne({ title: albumName.toLowerCase().replace(/\s/g, '') });
+        if (!album) {
+            return res.status(404).json({ message: 'Album not found' });
+        }
+        return res.json({ album });
+    } catch (err) {
+        res.status(500).json({ error: err.message })
+    }
+});
+
 
 /** Async await Route to add a new album. */
 router.post('/', async (req, res) => {
@@ -73,6 +88,21 @@ router.get('/:albumId/songs', async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err.message })
     }
-  });  
+  });
+
+/** Async await route to add a song to an album by album id */
+router.post('/:albumId/songs', async (req, res) => {
+    const { title, length, featuredArtists, isSingle, highestChartPosition, releaseDate } = req.body;
+    try {
+        const album = await Album.findById(req.params.albumId);
+        if (!album) {
+            return res.status(404).json({ message: 'Album not found' });
+        }
+        const song = await Song.create({ title, length, featuredArtists, isSingle, highestChartPosition, releaseDate, album: album._id });
+        return res.status(201).json({ song });
+    } catch (err) {
+        res.status(500).json({ error: err.message })
+    }
+});
 
 module.exports = router

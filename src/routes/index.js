@@ -1,6 +1,6 @@
 const express = require('express')
 const albumRoutes = require('./album.js')
-const userRoutes = require('./user.js')
+const userRoutes = require('./auth.js')
 const songRoutes = require('./song.js')
 
 const router = express.Router()

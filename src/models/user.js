@@ -1,23 +1,34 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const { Schema, model } = require('mongoose');
+const bcrypt = require('bcrypt');
 
-// Add your models here.
-const UserSchema = new Schema({
+const userSchema = new Schema({
     username: { type: String, required: true },
-    password: { type: String, select: false },
-    messages: [{ type: Schema.Types.ObjectId, ref:"Message"}]
-  })
+    password: { type: String, select: false, required: true },
+}, { timestamps: true });
 
-UserSchema.pre('findOne', function (next) {
-  this.populate('messages')
-  next()
-})
+userSchema.pre('save', async function (next) {
+    // ENCRYPT PASSWORD
+    const user = this;
+    if (!user.isModified('password')) {
+      return next();
+    }
+    try {
+      const salt = await bcrypt.genSalt(10);
+      const hash = await bcrypt.hash(user.password, salt);
+      user.password = hash;
+      next();
+    } catch (err) {
+      console.log(err.message);
+    }
+  });
 
-UserSchema.pre('find', function (next) {
-  this.populate('messages')
-  next()
-})
-  
-  const User = mongoose.model('User', UserSchema)
-  
-  module.exports = User
+userSchema.methods.comparePassword = async function(password) {
+    try {
+        const user = this;
+        return await bcrypt.compare(password, user.password);
+    } catch (err) {
+        console.log(err.message);
+    }
+};
+
+module.exports = model('User', userSchema);

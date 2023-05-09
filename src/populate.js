@@ -5,6 +5,7 @@ dotenv.config();
 
 const AlbumModel = require('./models/Album');
 const SongModel = require('./models/Song');
+const UserModel = require('./models/User');
 
 const populateDatabase = async () => {
     try {
@@ -12,7 +13,6 @@ const populateDatabase = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
-        console.log('Connected to MongoDB');
 
         const albums = JSON.parse(fs.readFileSync(`${__dirname}/albums.json`, 'utf-8'));
         const songs = JSON.parse(fs.readFileSync(`${__dirname}/songs.json`, 'utf-8'));
@@ -30,9 +30,7 @@ const populateDatabase = async () => {
         await SongModel.deleteMany({});
 
         await AlbumModel.create(albums, { validateBeforeSave: false });
-        console.log('Album data successfully loaded');
 
-        //loop through every song. If the album matches the name of a Album in the database, replace the album value with the album id
         const albumIds = await AlbumModel.find().select('_id title');
         const albumIdMap = albumIds.reduce((acc, album) => {
             acc[album.title] = album._id;
@@ -48,15 +46,22 @@ const populateDatabase = async () => {
 
         //Build songs in the database
         await SongModel.create(songsWithAlbumIds, { validateBeforeSave: true });
-        console.log('Song data successfully loaded and related to albums');
 
         //Middleware on Songs Model should handle pushing the Song ID to the Album's songs array.
+
+        // Delete all user data from DB
+        await UserModel.deleteMany({});
+
+        // Create a user
+        await UserModel.create({
+            username: 'testuser',
+            password: 'testpassword',
+        });
+
     } catch (err) {
         console.log(err);
     }
 };
-
-populateDatabase();
 
 module.exports = populateDatabase;
 

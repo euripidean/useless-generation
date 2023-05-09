@@ -1,6 +1,10 @@
 require('dotenv/config')
 const express = require('express')
 const bodyParser = require('body-parser')
+// const checkAuth = require('./middleware/checkAuth.js')
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const populateDatabase = require('./populate.js')
 
 // Set App Variable
 const app = express()
@@ -15,6 +19,15 @@ app.use((req, res, next) => {
     next()
 })
 
+app.use(cookieParser());
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+}));
+
+// app.use(checkAuth)
+
 // Database Setup
 require('./config/db-setup.js')
 
@@ -22,10 +35,18 @@ require('./config/db-setup.js')
 const router = require('./routes/index.js')
 app.use(router)
 
+// Populate Database
+if (process.env.NODE_ENV === 'production') {
+    populateDatabase().then(() => {
+        console.log('Database Populated')
+    }).catch((err) => {
+        console.log(err)
+    })
+  }
+
 // Start Server
 app.listen(process.env.PORT, () => {
-  console.log(`Useless Generation listening on ${process.env.PORT}!`)
+  console.log(`Useless Generation listening on ${process.env.PORT}. Stay beautiful.`)
 });
 
-// Populate Database
-require('./populate.js')
+module.exports = app

@@ -1,1 +1,2 @@
-# Useless Generation - a Manic Street Preachers API
+# Useless Generation 
+## - a Manic Street Preachers API
