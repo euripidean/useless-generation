@@ -10,7 +10,6 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 const agent = chai.request.agent(app);
-let albumId;
 
 describe('Album', () => {
     before(async function () {
@@ -22,9 +21,6 @@ describe('Album', () => {
         const albumRes = await agent
           .post('/albums')
           .send({ title: 'test album', year: '2020', totalTracks: 10, chartPosition: 1, coverArtUrl: 'https://www.google.com', songs: [] });
-        
-        // Set albumId to be used later
-        albumId = albumRes.body._id;
       });
 
     describe('Querying albums', () => {
