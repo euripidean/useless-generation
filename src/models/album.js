@@ -12,6 +12,16 @@ const AlbumSchema = new Schema({
     songs: [{ type: Schema.Types.ObjectId, ref: 'Song' }],
 })
 
+AlbumSchema.pre('findOne', function (next) {
+    this.populate('songs')
+    next()
+})
+
+AlbumSchema.pre('find', function (next) {
+    this.populate('songs')
+    next()
+})
+
 const Album = mongoose.model('Album', AlbumSchema)
 
 module.exports = Album
