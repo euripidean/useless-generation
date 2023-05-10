@@ -1,6 +1,4 @@
 * [Home](/)
-* [Getting Started](examples.md)
-* [Authentication](authentication.md)
+* [Getting Started](getting_started.md)
 * [Endpoints](endpoints.md)
-* [Errors](errors.md)
 * [Models](models.md)

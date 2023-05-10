@@ -1,7 +1,7 @@
 require('dotenv/config')
 const express = require('express')
 const bodyParser = require('body-parser')
-// const checkAuth = require('./middleware/checkAuth.js')
+const checkAuth = require('./middleware/checkAuth.js')
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const populateDatabase = require('./populate.js')
@@ -26,7 +26,7 @@ app.use(session({
     saveUninitialized: true,
 }));
 
-// app.use(checkAuth)
+app.use(checkAuth)
 
 // Database Setup
 require('./config/db-setup.js')

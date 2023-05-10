@@ -29,7 +29,7 @@ router.post('/signup', async (req, res) => {
             expiresIn: "60 days"
         });
         res.cookie('nToken', token, { maxAge: 900000, httpOnly: true });
-        res.status(201).json({ message: "User created", user });
+        res.status(201).json({ message: "User created", token });
     } 
     catch (err) {
         res.status(500).json({ error: err.message })
@@ -43,12 +43,12 @@ router.post('/login', async (req, res) => {
         // check if user exists
         const user = await User.findOne({ username }, 'username password');
         if (!user) {
-            return res.status(401).json({ error: 'Username issue' });
+            return res.status(401).json({ error: 'Incorrect username or password.' });
         }
         // check if password matches
         const passwordMatch = await user.comparePassword(password);
         if (!passwordMatch) {
-            return res.status(401).json({ error: 'Password Issue', passwordMatch });
+            return res.status(401).json({ error: 'Incorrect username or password.' });
         }
         // create token
         const token = jwt.sign({ _id: user._id, username: user.username }, process.env.SECRET, {
@@ -56,7 +56,7 @@ router.post('/login', async (req, res) => {
         });
         // set cookie with token
         res.cookie('nToken', token, { maxAge: 900000, httpOnly: true });
-        res.status(200).json({ message: "User logged in", user });
+        res.status(200).json({ message: "User logged in", user, token });
     } catch (err) {
         res.status(500).json({ error: err.message })
     }
