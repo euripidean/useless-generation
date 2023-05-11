@@ -34,6 +34,16 @@ describe('Album', () => {
                 });
         });
 
+        // User who is not logged in cannot query all albums
+        it('should not be able to query all albums if not logged in', function (done) {
+            chai.request(app)
+                .get('/albums')
+                .end(function (err, res) {
+                    res.should.have.status(401);
+                    done();
+                });
+        });
+
         // Logged in user can query a specific album
         it('should be able to query a specific album', async () => {
             const album = await Album.findOne({ title: 'test album' });
@@ -56,6 +66,18 @@ describe('Album', () => {
                     done();
                 });
         });
+
+        // User who is not logged in cannot create an album
+        it('should not be able to create an album if not logged in', function (done) {
+            chai.request(app)
+                .post('/albums')
+                .send({ title: 'test album', year: '2020', totalTracks: 10, chartPosition: 1, coverArtUrl: 'https://www.google.com', songs: [] })
+                .end(function (err, res) {
+                    res.should.have.status(401);
+                    done();
+                });
+            });
+
     });
 
     describe('Updating albums', () => {
@@ -67,6 +89,15 @@ describe('Album', () => {
                 .send({ title: 'updated album', year: '2020', totalTracks: 10, chartPosition: 1, coverArtUrl: 'https://www.google.com', songs: [] });
             res.should.have.status(200);
             res.should.be.a('object');
+        });
+
+        // User who is not logged in cannot update an album
+        it('should not be able to update an album if not logged in', async () => {
+            const album = await Album.findOne({ title: 'test album' });
+            const res = await chai.request(app)
+                .put(`/albums/${album._id}`)
+                .send({ title: 'updated album', year: '2020', totalTracks: 10, chartPosition: 1, coverArtUrl: 'https://www.google.com', songs: [] });
+            res.should.have.status(401);
         });
     });
 
